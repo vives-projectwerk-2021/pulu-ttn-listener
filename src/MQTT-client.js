@@ -11,7 +11,7 @@ const client  = mqtt.connect(`mqtt://${process.env.BROKER_ADDRESS}`,
 client.on('connect', function () {
   client.subscribe('#', function (err) {
     if (!err) {
-      client.publish('v3/thomas-simulation@ttn/devices/dev1/down/push', 'Hello mqtt')
+      // client.publish('v3/thomas-simulation@ttn/devices/dev1/down/push', 'Hello mqtt')
     }
   })
 })
