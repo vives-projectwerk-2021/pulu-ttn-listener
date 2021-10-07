@@ -9,7 +9,7 @@ const Transmitter = {
     resource: 'posts',
 
     postPayload(payload) {
-        axios.post('http://localhost:3000/posts', payload)
+        axios.post(`${process.env.BACKEND_BASE_URL}:${process.env.BACKEND_PORT}/posts`, payload)
         .then(res => {
             console.log(`statusCode: ${res.status}`)
             console.log(res.data)
