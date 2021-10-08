@@ -26,8 +26,10 @@ client.on("error", (error) => {
 })
 
 function filterLoraMessage(msg) {
-  return {
-    //TODO: Keep only usable data
-    msg
+  let filtered = {
+    'decoded_payload': msg.uplink_message.decoded_payload,
+    'device_id': msg.end_device_ids.device_id,
+    'timestamp': msg.received_at
   }
+  return filtered
 }
