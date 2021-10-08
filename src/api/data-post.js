@@ -11,12 +11,12 @@ const Transmitter = {
     postPayload(payload) {
         axios.post(`${process.env.BACKEND_BASE_URL}:${process.env.BACKEND_PORT}/posts`, payload)
         .then(res => {
-            console.log(`statusCode: ${res.status}`)
-            console.log(res.data)
+          console.log(`statusCode: ${res.status}`)
+          console.log(res.data)
           })
-          .catch(error => {
-            console.error(error)
-          })
+        .catch(error => {
+          console.error(error)
+        })
     }
 }
 
