@@ -1,5 +1,7 @@
 const mqtt = require('mqtt')
 const Transmitter = require('./api/data-post.js')
+var Validator = require('jsonschema').Validator;
+const schema = require('../schema-decoded-payload.json')
 require('dotenv').config()
 
 const client  = mqtt.connect(`mqtt://${process.env.BROKER_ADDRESS}`, {
@@ -15,8 +17,10 @@ client.on('connect', () => {
 })
 
 client.on('message', (topic, message) => {
-  let formatted = filterLoraMessage(JSON.parse(message.toString()))
-  Transmitter.postPayload(formatted)
+  let formatted = validateLoraMessage(JSON.parse(message.toString()))
+  if(formatted){
+    Transmitter.postPayload(formatted)
+  }
 })
 
 //handle errors
@@ -25,11 +29,22 @@ client.on("error", (error) => {
   process.exit(1)
 })
 
-function filterLoraMessage(msg) {
-  let filtered = {
-    'decoded_payload': msg.uplink_message.decoded_payload,
-    'device_id': msg.end_device_ids.device_id,
-    'timestamp': msg.received_at
+var v = new Validator();
+
+function validateLoraMessage(msg) {
+
+  let validatorResult = ""
+
+  try{
+    validatorResult = v.validate(msg.uplink_message.decoded_payload, schema)
+  } catch (err) {
+    console.log(err)
   }
-  return filtered
+
+  if(validatorResult.valid){
+    return msg.uplink_message.decoded_payload
+  } else {
+    console.log("error: " + validatorResult.errors)
+    return null
+  }
 }
