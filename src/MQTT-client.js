@@ -12,14 +12,16 @@ const client  = mqtt.connect(`mqtt://${process.env.BROKER_ADDRESS}`, {
 
 client.on('connect', () => {
   client.subscribe('#', (err) => {
-    console.log(err)
+    // console.log(err)
   })
 })
 
 client.on('message', (topic, message) => {
-  let isValid = validateLoraMessage(JSON.parse(message.toString()))
+  let msg = JSON.parse(message.toString())
+  console.log(msg)
+  let isValid = validateLoraMessage(msg)
   if(isValid){
-    let formatted = formatLoraMessage(message)
+    let formatted = formatLoraMessage(msg)
     Transmitter.postPayload(formatted)
   }
 })
@@ -42,6 +44,7 @@ function validateLoraMessage(msg) {
   }
 
   if(validatorResult.valid){
+    console.log("Message is valid")
     return true
   } else {
     console.log("error: " + validatorResult.errors)
@@ -51,8 +54,11 @@ function validateLoraMessage(msg) {
 
 function formatLoraMessage(msg) {
   return {
-    "device_id": msg.end_device_ids.device_id,
-    "time": msg.received_at,
-    "sensors": msg.uplink_message.decoded_payload.sensors
+    "message": "sensor-data", 
+    "data": {
+      "device_id": msg.end_device_ids.device_id,
+      "time": msg.received_at,
+      "sensors": msg.uplink_message.decoded_payload.sensors
+    }
   }
 }
