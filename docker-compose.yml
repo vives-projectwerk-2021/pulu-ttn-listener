@@ -1,0 +1,6 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  backend: 
+    image: ghcr.io/vives-projectwerk-2021/backend:latest
+    ports:
+    - 3000:3000
