@@ -4,7 +4,7 @@ var Validator = require('jsonschema').Validator;
 const schema = require('../schema-decoded-payload.json')
 require('dotenv').config()
 
-const client  = mqtt.connect(`mqtt://${process.env.BROKER_ADDRESS}`, {
+const client  = mqtt.connect(`mqtts://${process.env.BROKER_ADDRESS}`, {
   'username': `${process.env.MQTT_USERNAME}`,
   'password': `${process.env.MQTT_PASSWORD}`,
   'clientId': 'mqttjs_' + Math.random().toString(16).substr(2, 8)
