@@ -38,7 +38,9 @@ function validateLoraMessage(msg) {
   let validatorResult = ""
 
   try{
-    validatorResult = v.validate(msg.uplink_message.decoded_payload, schema)
+    if(msg.uplink_message && msg.uplink_message.decoded_payload){
+      validatorResult = v.validate(msg.uplink_message.decoded_payload, schema)
+    }
   } catch (err) {
     console.log(err)
   }
