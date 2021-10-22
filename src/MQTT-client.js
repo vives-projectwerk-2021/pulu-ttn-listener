@@ -64,7 +64,7 @@ function formatLoraMessage(msg) {
       "sensors": msg.uplink_message.decoded_payload.sensors,
       "meta": {
         "gateway_cnt": msg.uplink_message.rx_metadata.length,
-        "strongest-rssi": msg.uplink_message.rx_metadata.map((e) => e.rssi).sort()[0]
+        "strongest_rssi": msg.uplink_message.rx_metadata.map((e) => e.rssi).sort()[0]
       }
     }
   }
