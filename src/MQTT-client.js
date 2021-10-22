@@ -60,7 +60,12 @@ function formatLoraMessage(msg) {
     "data": {
       "device_id": msg.end_device_ids.device_id,
       "time": msg.received_at,
-      "sensors": msg.uplink_message.decoded_payload.sensors
+      "count": msg.uplink_message.f_cnt,
+      "sensors": msg.uplink_message.decoded_payload.sensors,
+      "meta": {
+        "gateway_cnt": msg.uplink_message.rx_metadata.length,
+        "strongest-rssi": msg.uplink_message.rx_metadata.map((e) => e.rssi).sort()[0]
+      }
     }
   }
 }
