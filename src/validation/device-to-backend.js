@@ -74,3 +74,4 @@ const DeviceToBackend = {
 }
 
 /* export { DeviceToBackend } */
+module.exports = DeviceToBackend

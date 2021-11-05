@@ -23,7 +23,8 @@ client.on('message', (topic, message) => {
   console.log(msg)
   let isValid = validateLoraMessage(msg)
   if (isValid) {
-    if (ValidateDeviceToBackend(formatLoraMessage(msg))) {
+    let formatted = formatLoraMessage(msg)
+    if (ValidateDeviceToBackend(formatted)) {
       Transmitter.postPayload(formatted)
     }
   }
@@ -36,7 +37,7 @@ client.on("error", (error) => {
 })
 
 function ValidateDeviceToBackend(json) {
-  const validation = validate(json, DeviceToBackend.create)
+  const validation = v.validate(json, DeviceToBackend.create)
   if (!validation.valid) {
     console.log("The json validator where data from the ttn listener is send to the back-end gave an error: ", validation.errors)
     return false;
