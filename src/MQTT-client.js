@@ -93,7 +93,13 @@ function formatLoraMessage(msg) {
 function getStrongestConnection(metadata){
   // Create array of RSSIs and Gateways
   let RssiArr = metadata.map((e) => e.rssi)
-  let GatewayArr = metadata.map((e) => e.packet_broker.forwarder_cluster_id)
+  let GatewayArr = metadata.map((e) => {
+    if (e.packet_broker.forwarder_cluster_id){
+      return e.packet_broker.forwarder_cluster_id
+    }
+    return "simulated"
+  })
+  
   let ComboArr = [RssiArr, GatewayArr]
   // Transpose array
   ComboArr = ComboArr[0].map((col, i) => ComboArr.map(row => row[i]))
