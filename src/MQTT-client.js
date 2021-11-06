@@ -1,6 +1,6 @@
 const mqtt = require('mqtt')
 const Transmitter = require('./api/data-post.js')
-var Validator = require('jsonschema').Validator;
+const Validator = require('jsonschema').Validator;
 const schema = require('../schema-decoded-payload.json')
 require('dotenv').config()
 
@@ -28,7 +28,7 @@ client.on('message', (topic, message) => {
 
 //handle errors
 client.on("error", (error) => {
-  console.log("Can't connect" + error)
+  console.log("Can't connect " + error)
   process.exit(1)
 })
 
@@ -55,6 +55,9 @@ function validateLoraMessage(msg) {
 }
 
 function formatLoraMessage(msg) {
+  // Get strongest RSSI and it's gateway
+  const [bestRSSI, bestGateway] = getStrongestConnection(msg.uplink_message.rx_metadata)
+
   return {
     "message": "sensor-data", 
     "data": {
@@ -64,8 +67,21 @@ function formatLoraMessage(msg) {
       "sensors": msg.uplink_message.decoded_payload.sensors,
       "meta": {
         "gateway_cnt": msg.uplink_message.rx_metadata.length,
-        "strongest_rssi": msg.uplink_message.rx_metadata.map((e) => e.rssi).sort()[0]
+        "strongest_rssi": bestRSSI,
+        "strongest_gateway": bestGateway,
       }
     }
   }
+}
+
+function getStrongestConnection(metadata){
+  // Create array of RSSIs and Gateways
+  let RssiArr = metadata.map((e) => e.rssi)
+  let GatewayArr = metadata.map((e) => e.packet_broker.forwarder_cluster_id)
+  let ComboArr = [RssiArr, GatewayArr]
+  // Transpose array
+  ComboArr = ComboArr[0].map((col, i) => ComboArr.map(row => row[i]))
+  // Sort to get lowest (best) RSSI
+  let strongestCombo = ComboArr.sort((a, b) => a[0] - b[0])
+  return strongestCombo[0]
 }
