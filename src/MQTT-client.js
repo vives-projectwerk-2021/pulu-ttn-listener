@@ -94,7 +94,7 @@ function getStrongestConnection(metadata){
   // Create array of RSSIs and Gateways
   let RssiArr = metadata.map((e) => e.rssi)
   let GatewayArr = metadata.map((e) => {
-    if (e.packet_broker.forwarder_cluster_id){
+    if (e.packet_broker){
       return e.packet_broker.forwarder_cluster_id
     }
     return "simulated"
