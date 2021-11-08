@@ -124,69 +124,9 @@
                           }
                       },
                       "required": [ "value" ]
-                  },
-                  "level5": {
-                      "description": "Object that has the value of the level5 moisture sensor.",
-                      "type": "object",
-                      "properties": {
-                          "value": {
-                              "description": "Has the value of the level5 moisture sensor.",
-                              "type": "integer"
-                          },
-                          "status":{
-                              "description": "Has status codes of the level5 moisture sensor. When there is 0 in the data it's representing no data send",
-                              "type": "integer"
-                          }
-                      },
-                      "required": [ "value" ]
-                  },
-                  "level6": {
-                      "description": "Object that has the value of the level6 moisture sensor.",
-                      "type": "object",
-                      "properties": {
-                          "value": {
-                              "description": "Has the value of the level6 moisture sensor.",
-                              "type": "integer"
-                          },
-                          "status":{
-                              "description": "Has status codes of the level6 moisture sensor. When there is 0 in the data it's representing no data send",
-                              "type": "integer"
-                          }
-                      },
-                      "required": [ "value" ]
-                  },
-                  "level7": {
-                      "description": "Object that has the value of the level7 moisture sensor.",
-                      "type": "object",
-                      "properties": {
-                          "value": {
-                              "description": "Has the value of the level7 moisture sensor.",
-                              "type": "integer"
-                          },
-                          "status":{
-                              "description": "Has status codes of the level7 moisture sensor. When there is 0 in the data it's representing no data send",
-                              "type": "integer"
-                          }
-                      },
-                      "required": [ "value" ]
-                  },
-                  "level8": {
-                      "description": "Object that has the value of the level8 moisture sensor.",
-                      "type": "object",
-                      "properties": {
-                          "value": {
-                              "description": "Has the value of the level8 moisture sensor.",
-                              "type": "integer"
-                          },
-                          "status":{
-                              "description": "Has status codes of the level8 moisture sensor. When there is 0 in the data it's representing no data send",
-                              "type": "integer"
-                          }
-                      },
-                      "required": [ "value" ]
                   }
               },
-              "required": ["level1" , "level2" , "level3" , "level4" , "level5" , "level6" , "level7" , "level8"]
+              "required": ["level1" , "level2" , "level3" , "level4" ]
           },
           "battery": {
               "description": "Object that has the value of the battery",
