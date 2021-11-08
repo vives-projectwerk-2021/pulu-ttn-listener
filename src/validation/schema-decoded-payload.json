@@ -113,69 +113,13 @@
                 "required": [
                   "value"
                 ]
-              },
-              "level5": {
-                "description": "Object that has the value of the level5 moisture sensor.",
-                "type": "object",
-                "properties": {
-                  "value": {
-                    "description": "Has the value of the level5 moisture sensor.",
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "value"
-                ]
-              },
-              "level6": {
-                "description": "Object that has the value of the level6 moisture sensor.",
-                "type": "object",
-                "properties": {
-                  "value": {
-                    "description": "Has the value of the level6 moisture sensor.",
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "value"
-                ]
-              },
-              "level7": {
-                "description": "Object that has the value of the level7 moisture sensor.",
-                "type": "object",
-                "properties": {
-                  "value": {
-                    "description": "Has the value of the level7 moisture sensor.",
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "value"
-                ]
-              },
-              "level8": {
-                "description": "Object that has the value of the level8 moisture sensor.",
-                "type": "object",
-                "properties": {
-                  "value": {
-                    "description": "Has the value of the level8 moisture sensor.",
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "value"
-                ]
               }
             },
             "required": [
               "level1",
               "level2",
               "level3",
-              "level4",
-              "level5",
-              "level6",
-              "level7",
-              "level8"
+              "level4"
             ]
           },
           "battery": {
