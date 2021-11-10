@@ -6,14 +6,8 @@ const schemaUrl = axios.create({
 
 const SchemaFetcher = {
   fetch() {
-    schemaUrl.get()
-    .then((res) => {
-      return res.data
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    return schemaUrl.get()
   }
 }
 
-module.exports = SchemaFetcher
+module.exports = {SchemaFetcher}
