@@ -1,8 +1,7 @@
 const mqtt = require('mqtt')
 const Transmitter = require('./api/data-post.js')
 var Validator = require('jsonschema').Validator;
-const schema = require('../src/validation/schema-decoded-payload.json')
-//import { DeviceToBackend } from '../src/validation/device-to-backend'
+const {SchemaFetcher} = require('./validation/schema-decoded-payload')
 const DeviceToBackend = require('../src/validation/device-to-backend')
 require('dotenv').config()
 
@@ -49,6 +48,13 @@ function ValidateDeviceToBackend(json) {
 
 
 var v = new Validator();
+let schema =  SchemaFetcher.fetch()
+                .then((res) => {
+                  return res.data
+                })
+                .catch((err) => {
+                  console.log("Failed to fetch JSON-schema")
+                })
 
 function validateLoraMessage(msg) {
   let validatorResult = ""
