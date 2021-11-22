@@ -9,4 +9,5 @@ COPY . .
 RUN npm install
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-CMD ["node", "./src/MQTT-client.js"]
+# CMD ["node", "./src/MQTT-client.js"]
+CMD ["npm", "run", "serve"]
