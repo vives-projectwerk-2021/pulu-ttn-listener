@@ -6,7 +6,7 @@ const api = axios.create({
 })
 
 const Transmitter = {
-    resource: 'sensors',
+    resource: 'livedata',
 
     postPayload(payload) {
       api.post(`/${this.resource}`, payload)
