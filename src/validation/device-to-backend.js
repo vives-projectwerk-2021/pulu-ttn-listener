@@ -55,8 +55,8 @@ const DeviceToBackend = {
                 }
             }
         },
-        "additionalProperties": true
-        //RSSI might be added, so additionalProps is true for now
+        // no more additional properties can enter our database
+        "additionalProperties": false
     }
 }
 

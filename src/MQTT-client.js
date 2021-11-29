@@ -19,7 +19,6 @@ client.on('connect', () => {
 
 client.on('message', (topic, message) => {
   let msg = JSON.parse(message.toString())
-  console.log(msg)
   let isValid = validateLoraMessage(msg)
   if (isValid) {
     let formatted = formatLoraMessage(msg)

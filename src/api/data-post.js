@@ -6,13 +6,12 @@ const api = axios.create({
 })
 
 const Transmitter = {
-    resource: 'sensors',
+    resource: 'livedata',
 
     postPayload(payload) {
       api.post(`/${this.resource}`, payload)
       .then(res => {
-        console.log(`statusCode: ${res.status}`)
-        console.log(res.data)
+        console.log(`Backend responded with status code: ${res.status}`)
         })
       .catch(error => {
         console.error(error)
